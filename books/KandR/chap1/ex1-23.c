@@ -25,8 +25,10 @@ int main(){
     char chars[MAX_SIZE];
     int checkmore =  0;
     int singlelinemode = 0;
+    int inquotemode = 0;
     while((c=getchar()) != EOF) {
-        if (checkmore) {
+        if (lastc != '\'' && c == '"') inquotemode = !inquotemode;
+        if (!inquotemode && checkmore) {
             checkmore = 0;
             if (c != '*' && c != '/') {
                 putchar(lastc);
@@ -34,19 +36,19 @@ int main(){
             if (c == '/')
                 singlelinemode = 1;
         }
-        if (singlelinemode) {   // for single line mode
+        if (!inquotemode && singlelinemode) {   // for single line mode
             if (c == '\n'){
                 putchar(c);
                 singlelinemode = 0;
             }
         }
         else {  /* for multiple line mode */
-            if (start_pos == NA && c == '*' && lastc == '/') {
+            if (!inquotemode && start_pos == NA && c == '*' && lastc == '/') {
                 chars[i] = c; // / will be the 0 index char
                 start_pos = 0;
                 i ++;
             }
-            else if (start_pos != NA && c == '/' && lastc == '*') {
+            else if (!inquotemode && start_pos != NA && c == '/' && lastc == '*') {
                 chars[i] = c;
                 chars[i+1] = '\0';
                 start_pos = NA;
@@ -54,7 +56,7 @@ int main(){
             else {
                 if (start_pos == NA)    
                 {
-                    if (c == '/') {
+                    if (!inquotemode && c == '/') {
                         chars[0] = c;
                         checkmore = 1;
                         i = 1;
@@ -76,6 +78,8 @@ int main(){
         chars[i] = '\0';
         printf("%s", chars);
     }
+    printf("// this is not single line comment\n");
+    printf("/* this is not multiple line comment */\n");
     return 0;
 }
 /*
