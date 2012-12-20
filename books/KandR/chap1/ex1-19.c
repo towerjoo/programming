@@ -12,7 +12,7 @@ void reverse(char s[]);
 
 // Main Entry Point
 int main(){
-    char c;
+    int c;
     char line[MAX_LINE_LEN];
     int i = 0;
     while((c=getchar()) != EOF){

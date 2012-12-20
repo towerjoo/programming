@@ -9,6 +9,16 @@ author: Zhu Tao<zhutao.iscas@gmail.com>
 
 // Main Entry Point
 int main(){
-
-    return 0;
+	int n = 8;
+	int c;
+	int i;
+	while((c=getchar()) != EOF) {
+		if (c == '\t') {
+			for(i=0; i<n; i++) 
+				putchar(' ');
+		}
+		else
+			putchar(c);
+	}
+	return 0;
 }
