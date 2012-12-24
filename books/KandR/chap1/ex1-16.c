@@ -6,9 +6,14 @@ author: Zhu Tao<zhutao.iscas@gmail.com>
 */
 #include<stdio.h>
 
+int abc(){
+    int i;
+    return i;
+}
 
 // Main Entry Point
 int main(){
+    
 
     return 0;
 }
