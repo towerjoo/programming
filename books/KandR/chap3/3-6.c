@@ -23,18 +23,19 @@ void reverse(char s[]){
 void itoa(int n, char s[], int minwidth) {
     int sign;
     int padding = 0;
-    int i;
+    int i = 0;
+    int j;
     sign = n;
     do {
         s[i++] = (sign > 0 ? 1 : -1) * (n % 10) + '0';
-    }while(n / 10);
+    }while(n /= 10);
     if (sign < 0)
         s[i++] = '-';
     padding = minwidth - i;
-    for(i=0; i < padding; i++){
-        s[i++] = " ";
+    for(j=i; j < i+padding; j++){
+        s[j] = 'B';
     }
-    s[i] = '\0';
+    s[j] = '\0';
     reverse(s);
 }
 
@@ -42,7 +43,8 @@ void itoa(int n, char s[], int minwidth) {
 int main(){
     int a = 12334;
     char s[255];
-    itoa(a, s, 3);
-    printf(
+    int padding = 23;
+    itoa(a, s, padding);
+    printf("%d after %d padding is %s\n", a, padding, s);
     return 0;
 }
